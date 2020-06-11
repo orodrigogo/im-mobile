@@ -1,6 +1,7 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import {StatusBar} from 'react-native';
 
 import Home from './pages/Home';
 import Detail from './pages/Detail';
@@ -11,6 +12,7 @@ const AppStack = createStackNavigator();
 const Routes = () => {
   return (
     <NavigationContainer>
+      <StatusBar barStyle="light-content" />
       <AppStack.Navigator
         headerMode="none"
         screenOptions={{

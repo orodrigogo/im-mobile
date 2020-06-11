@@ -12,6 +12,7 @@ import {RectButton} from 'react-native-gesture-handler';
 import {useNavigation} from '@react-navigation/native';
 
 import Header from '../../components/Header';
+import Title from '../../components/Title';
 
 const movies = [1, 2, 3, 4, 5];
 
@@ -27,8 +28,8 @@ const Favorites = () => {
       <View style={styles.container}>
         <Header />
 
-        <View>
-          <Text style={styles.title}>Meus Favoritos</Text>
+        <View style={styles.section}>
+          <Title text="Meus Favoritos" />
           <TextInput
             style={styles.input}
             placeholder="Buscar..."
@@ -36,22 +37,21 @@ const Favorites = () => {
           />
         </View>
 
-        <View>
-          <FlatList
-            columnWrapperStyle={styles.movies}
-            data={movies}
-            numColumns={3}
-            renderItem={(movies) => (
-              <Image
-                style={styles.image}
-                source={{
-                  uri:
-                    'https://upload.wikimedia.org/wikipedia/pt/9/9b/Avengers_Endgame.jpg',
-                }}
-              />
-            )}
-          />
-        </View>
+        <FlatList
+          style={{flex: 1}}
+          columnWrapperStyle={styles.movies}
+          data={movies}
+          numColumns={3}
+          renderItem={(movies) => (
+            <Image
+              style={styles.image}
+              source={{
+                uri:
+                  'https://upload.wikimedia.org/wikipedia/pt/9/9b/Avengers_Endgame.jpg',
+              }}
+            />
+          )}
+        />
 
         <RectButton style={styles.button} onPress={handleGoBack}>
           <Text style={styles.buttonText}>Voltar</Text>
@@ -77,11 +77,8 @@ const styles = StyleSheet.create({
     width: 50,
     resizeMode: 'contain',
   },
-  section: {},
-  title: {
-    color: '#FFF',
-    fontWeight: 'bold',
-    fontSize: 18,
+  section: {
+    marginVertical: 30,
   },
   movies: {
     justifyContent: 'space-between',
@@ -104,6 +101,7 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: '#FFF',
+    marginVertical: 15,
     paddingVertical: 20,
     paddingHorizontal: 10,
     borderRadius: 7,

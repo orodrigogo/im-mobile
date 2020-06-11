@@ -11,6 +11,7 @@ import {RectButton} from 'react-native-gesture-handler';
 import {useNavigation} from '@react-navigation/native';
 
 import Header from '../../components/Header';
+import Title from '../../components/Title';
 
 const movies = [1, 2, 3, 4, 5];
 
@@ -27,7 +28,7 @@ const Home = () => {
         <Header />
 
         <View style={styles.section}>
-          <Text style={styles.title}>Recomendados para você</Text>
+          <Title text="Recomendados para você" />
           <ScrollView
             style={styles.movies}
             horizontal
@@ -47,7 +48,7 @@ const Home = () => {
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.title}>Populares</Text>
+          <Title text="Populares" />
           <ScrollView
             style={styles.movies}
             horizontal
@@ -67,7 +68,7 @@ const Home = () => {
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.title}>Assistir novamente</Text>
+          <Title text="Assistir novamente" />
           <ScrollView
             style={styles.movies}
             horizontal
@@ -101,11 +102,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
   section: {},
-  title: {
-    color: '#FFF',
-    fontWeight: 'bold',
-    fontSize: 18,
-  },
   movies: {
     marginTop: 10,
   },
