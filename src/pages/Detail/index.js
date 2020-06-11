@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, Image, SafeAreaView, StyleSheet} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/native';
 
 import Button from '../../components/Button';
@@ -32,10 +33,12 @@ const Detail = () => {
 
           <View style={styles.buttons}>
             <View>
+              <Icon name="heart" />
               <Text>Marcar na minha lista de favoritos</Text>
             </View>
             <View>
               <Text>Marcar como já assistido</Text>
+              <Icon name="eye" />
             </View>
           </View>
 
@@ -98,6 +101,7 @@ const styles = StyleSheet.create({
   },
   aboutText: {
     color: '#FFF',
+    textAlign: 'justify',
   },
   subject: {
     marginTop: 5,
