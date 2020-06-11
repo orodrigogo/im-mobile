@@ -32,13 +32,15 @@ const Detail = () => {
           </View>
 
           <View style={styles.buttons}>
-            <View>
-              <Icon name="heart" />
-              <Text>Marcar na minha lista de favoritos</Text>
+            <View style={styles.mark}>
+              <Icon name="heart" style={styles.actived} />
+              <Text style={styles.markTextLeft}>
+                Marcar na minha lista de favoritos
+              </Text>
             </View>
-            <View>
-              <Text>Marcar como já assistido</Text>
-              <Icon name="eye" />
+            <View style={styles.mark}>
+              <Text style={styles.markTextRight}>Marcar como já assistido</Text>
+              <Icon name="eye" style={styles.actived} />
             </View>
           </View>
 
@@ -102,6 +104,7 @@ const styles = StyleSheet.create({
   aboutText: {
     color: '#FFF',
     textAlign: 'justify',
+    marginTop: 7,
   },
   subject: {
     marginTop: 5,
@@ -121,6 +124,31 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     paddingHorizontal: 7,
     fontSize: 16,
+  },
+  buttons: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 20,
+  },
+  mark: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  actived: {
+    color: '#E21221',
+    fontSize: 32,
+  },
+  markTextLeft: {
+    color: '#FFF',
+    width: 110,
+    marginLeft: 7,
+  },
+  markTextRight: {
+    color: '#FFF',
+    width: 110,
+    textAlign: 'right',
+    marginRight: 7,
   },
 });
 
