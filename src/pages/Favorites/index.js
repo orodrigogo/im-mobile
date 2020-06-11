@@ -13,6 +13,7 @@ import {useNavigation} from '@react-navigation/native';
 
 import Header from '../../components/Header';
 import Title from '../../components/Title';
+import Button from '../../components/Button';
 
 const movies = [1, 2, 3, 4, 5];
 
@@ -53,9 +54,7 @@ const Favorites = () => {
           )}
         />
 
-        <RectButton style={styles.button} onPress={handleGoBack}>
-          <Text style={styles.buttonText}>Voltar</Text>
-        </RectButton>
+        <Button title="Voltar" onPress={handleGoBack} />
       </View>
     </SafeAreaView>
   );
@@ -87,17 +86,6 @@ const styles = StyleSheet.create({
     height: 150,
     width: 100,
     marginVertical: 5,
-  },
-  button: {
-    backgroundColor: '#E21221',
-    paddingVertical: 15,
-    alignItems: 'center',
-    borderRadius: 7,
-  },
-  buttonText: {
-    color: '#FFF',
-    fontWeight: '500',
-    fontSize: 18,
   },
   input: {
     backgroundColor: '#FFF',
