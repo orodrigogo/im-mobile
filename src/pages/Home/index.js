@@ -8,12 +8,19 @@ import {
   ScrollView,
 } from 'react-native';
 import {RectButton} from 'react-native-gesture-handler';
+import {useNavigation} from '@react-navigation/native';
 
 import logo from '../../assets/logo-im.png';
 
 const movies = [1, 2, 3, 4, 5];
 
 const Home = () => {
+  const navigation = useNavigation();
+
+  function handleFavorites() {
+    navigation.navigate('Favorites');
+  }
+
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={styles.container}>
@@ -81,7 +88,7 @@ const Home = () => {
           </ScrollView>
         </View>
 
-        <RectButton style={styles.button}>
+        <RectButton style={styles.button} onPress={handleFavorites}>
           <Text style={styles.buttonText}>Meus Favoritos</Text>
         </RectButton>
       </View>
