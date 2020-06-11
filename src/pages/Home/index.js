@@ -1,18 +1,11 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  SafeAreaView,
-  StyleSheet,
-  Image,
-  ScrollView,
-} from 'react-native';
+import {View, SafeAreaView, StyleSheet} from 'react-native';
 
 import {useNavigation} from '@react-navigation/native';
 
 import Header from '../../components/Header';
-import Title from '../../components/Title';
 import Button from '../../components/Button';
+import MoviesSection from '../../components/MoviesSection';
 
 const movies = [1, 2, 3, 4, 5];
 
@@ -24,68 +17,14 @@ const Home = () => {
   }
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={styles.main}>
       <View style={styles.container}>
         <Header />
 
-        <View style={styles.section}>
-          <Title text="Recomendados para você" />
-          <ScrollView
-            style={styles.movies}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{paddingHorizontal: 20}}>
-            {movies.map((movie) => (
-              <Image
-                style={styles.image}
-                key={movie}
-                source={{
-                  uri:
-                    'https://upload.wikimedia.org/wikipedia/pt/9/9b/Avengers_Endgame.jpg',
-                }}
-              />
-            ))}
-          </ScrollView>
-        </View>
-
-        <View style={styles.section}>
-          <Title text="Populares" />
-          <ScrollView
-            style={styles.movies}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{paddingHorizontal: 20}}>
-            {movies.map((movie) => (
-              <Image
-                style={styles.image}
-                key={movie}
-                source={{
-                  uri:
-                    'https://upload.wikimedia.org/wikipedia/pt/9/9b/Avengers_Endgame.jpg',
-                }}
-              />
-            ))}
-          </ScrollView>
-        </View>
-
-        <View style={styles.section}>
-          <Title text="Assistir novamente" />
-          <ScrollView
-            style={styles.movies}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{paddingHorizontal: 20}}>
-            {movies.map((movie) => (
-              <Image
-                style={styles.image}
-                key={movie}
-                source={{
-                  uri:
-                    'https://upload.wikimedia.org/wikipedia/pt/9/9b/Avengers_Endgame.jpg',
-                }}
-              />
-            ))}
-          </ScrollView>
+        <View style={styles.content}>
+          <MoviesSection title="Recomendados para você" movies={movies} />
+          <MoviesSection title="Populares" movies={movies} />
+          <MoviesSection title="Assistir Novamente" movies={movies} />
         </View>
 
         <Button onPress={handleFavorites} title="Meus Favoritos" />
@@ -95,19 +34,17 @@ const Home = () => {
 };
 
 const styles = StyleSheet.create({
+  main: {
+    flex: 1,
+  },
   container: {
     flex: 1,
     paddingHorizontal: 15,
     justifyContent: 'space-around',
   },
-  section: {},
-  movies: {
-    marginTop: 10,
-  },
-  image: {
-    height: 150,
-    width: 100,
-    marginHorizontal: 5,
+  content: {
+    flex: 1,
+    marginTop: 30,
   },
 });
 
