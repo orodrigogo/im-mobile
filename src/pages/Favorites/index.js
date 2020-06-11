@@ -29,7 +29,11 @@ const Favorites = () => {
 
         <View>
           <Text style={styles.title}>Meus Favoritos</Text>
-          <TextInput />
+          <TextInput
+            style={styles.input}
+            placeholder="Buscar..."
+            autoCorrect={false}
+          />
         </View>
 
         <View>
@@ -97,6 +101,13 @@ const styles = StyleSheet.create({
     color: '#FFF',
     fontWeight: '500',
     fontSize: 18,
+  },
+  input: {
+    backgroundColor: '#FFF',
+    paddingVertical: 20,
+    paddingHorizontal: 10,
+    borderRadius: 7,
+    color: '#221F1F',
   },
 });
 
