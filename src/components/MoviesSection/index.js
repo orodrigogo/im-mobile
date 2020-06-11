@@ -1,9 +1,21 @@
 import React from 'react';
-import {View, ScrollView, FlatList, Image, StyleSheet} from 'react-native';
+import {
+  View,
+  TouchableOpacity,
+  FlatList,
+  Image,
+  StyleSheet,
+} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 import Title from '../Title';
 
 const MoviesSection = ({title, movies}) => {
+  const navigation = useNavigation();
+  function handleOpenDetail() {
+    navigation.navigate('Detail');
+  }
+
   return (
     <View style={styles.container}>
       <Title text={title} />
@@ -13,13 +25,15 @@ const MoviesSection = ({title, movies}) => {
         style={styles.movies}
         data={movies}
         renderItem={(movie) => (
-          <Image
-            style={styles.image}
-            source={{
-              uri:
-                'https://upload.wikimedia.org/wikipedia/pt/9/9b/Avengers_Endgame.jpg',
-            }}
-          />
+          <TouchableOpacity activeOpacity={0.5} onPress={handleOpenDetail}>
+            <Image
+              style={styles.image}
+              source={{
+                uri:
+                  'https://upload.wikimedia.org/wikipedia/pt/9/9b/Avengers_Endgame.jpg',
+              }}
+            />
+          </TouchableOpacity>
         )}
       />
     </View>
