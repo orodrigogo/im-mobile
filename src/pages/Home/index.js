@@ -10,7 +10,7 @@ import {
 import {RectButton} from 'react-native-gesture-handler';
 import {useNavigation} from '@react-navigation/native';
 
-import logo from '../../assets/logo-im.png';
+import Header from '../../components/Header';
 
 const movies = [1, 2, 3, 4, 5];
 
@@ -24,9 +24,7 @@ const Home = () => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={styles.container}>
-        <View style={styles.header}>
-          <Image source={logo} style={styles.logo} />
-        </View>
+        <Header />
 
         <View style={styles.section}>
           <Text style={styles.title}>Recomendados para você</Text>
@@ -101,16 +99,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 15,
     justifyContent: 'space-around',
-  },
-  header: {
-    width: '100%',
-    alignContent: 'center',
-    alignItems: 'center',
-  },
-  logo: {
-    height: 50,
-    width: 50,
-    resizeMode: 'contain',
   },
   section: {},
   title: {
