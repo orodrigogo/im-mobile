@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     paddingHorizontal: 7,
     fontSize: 16,
+    fontFamily: 'Roboto-regular',
   },
 });
 

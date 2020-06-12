@@ -17,8 +17,8 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#FFF',
-    fontWeight: 'bold',
     fontSize: 18,
+    fontFamily: 'Roboto-medium',
   },
   bar: {
     height: 5,

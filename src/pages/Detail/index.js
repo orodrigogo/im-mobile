@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontFamily: 'Roboto-medium',
     color: '#FFF',
   },
   recommendations: {
@@ -134,6 +134,7 @@ const styles = StyleSheet.create({
     color: '#FFF',
     textAlign: 'justify',
     marginTop: 7,
+    fontFamily: 'Roboto-regular',
   },
   subject: {
     marginTop: 5,
@@ -153,6 +154,7 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     paddingHorizontal: 7,
     fontSize: 16,
+    fontFamily: 'Roboto-regular',
   },
   buttons: {
     width: '100%',
@@ -176,12 +178,14 @@ const styles = StyleSheet.create({
     color: '#FFF',
     width: 110,
     marginLeft: 7,
+    fontFamily: 'Roboto-regular',
   },
   markTextRight: {
     color: '#FFF',
     width: 110,
     textAlign: 'right',
     marginRight: 7,
+    fontFamily: 'Roboto-regular',
   },
 });
 
