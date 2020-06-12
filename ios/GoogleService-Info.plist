@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>241045628473-qjiccg2vd7c3oi2o7ksfv80rai5uravi.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.241045628473-qjiccg2vd7c3oi2o7ksfv80rai5uravi</string>
+	<key>API_KEY</key>
+	<string>AIzaSyA5QerhdKiv6wHOIJHknxII4xrCfu9mSIc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>241045628473</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.im</string>
+	<key>PROJECT_ID</key>
+	<string>imovies-1c981</string>
+	<key>STORAGE_BUCKET</key>
+	<string>imovies-1c981.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:241045628473:ios:86a64da04a13ca22a94fe8</string>
+	<key>DATABASE_URL</key>
+	<string>https://imovies-1c981.firebaseio.com</string>
+</dict>
+</plist>

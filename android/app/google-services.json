@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "241045628473",
+    "firebase_url": "https://imovies-1c981.firebaseio.com",
+    "project_id": "imovies-1c981",
+    "storage_bucket": "imovies-1c981.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:241045628473:android:2097d7867b2de55ca94fe8",
+        "android_client_info": {
+          "package_name": "com.im"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "241045628473-48kobcdkcf9fa3tisftogjtvamn19sic.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCymVnISu4CcEU5tpKj9fE3Rh9FMN_P4hg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "241045628473-48kobcdkcf9fa3tisftogjtvamn19sic.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
