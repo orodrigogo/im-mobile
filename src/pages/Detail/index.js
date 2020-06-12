@@ -1,5 +1,12 @@
-import React from 'react';
-import {View, Text, Image, SafeAreaView, StyleSheet} from 'react-native';
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  Image,
+  SafeAreaView,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/native';
 
@@ -8,10 +15,20 @@ import Title from '../../components/Title';
 import Subject from '../../components/Subject';
 
 const Detail = () => {
+  const [watched, setWatched] = useState(true);
+  const [liked, setLiked] = useState(false);
   const navigation = useNavigation();
 
   function handleGoBack() {
     navigation.navigate('Home');
+  }
+
+  function handleWatch() {
+    setWatched(!watched);
+  }
+
+  function handleLike() {
+    setLiked(!liked);
   }
 
   return (
@@ -32,16 +49,28 @@ const Detail = () => {
           </View>
 
           <View style={styles.buttons}>
-            <View style={styles.mark}>
-              <Icon name="heart" style={styles.actived} />
+            <TouchableOpacity
+              style={styles.mark}
+              activeOpacity={0.5}
+              onPress={handleLike}>
+              <Icon
+                name="heart"
+                style={liked ? styles.actived : styles.disabled}
+              />
               <Text style={styles.markTextLeft}>
                 Marcar na minha lista de favoritos
               </Text>
-            </View>
-            <View style={styles.mark}>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.mark}
+              activeOpacity={0.5}
+              onPress={handleWatch}>
               <Text style={styles.markTextRight}>Marcar como já assistido</Text>
-              <Icon name="eye" style={styles.actived} />
-            </View>
+              <Icon
+                name="eye"
+                style={watched ? styles.actived : styles.disabled}
+              />
+            </TouchableOpacity>
           </View>
 
           <View style={styles.about}>
@@ -137,6 +166,10 @@ const styles = StyleSheet.create({
   },
   actived: {
     color: '#E21221',
+    fontSize: 32,
+  },
+  disabled: {
+    color: '#403D3D',
     fontSize: 32,
   },
   markTextLeft: {
