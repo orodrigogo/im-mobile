@@ -1,10 +1,14 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
+import {useTheme} from '../../hooks/ThemeContext';
+
 const Title = ({text}) => {
+  const {theme} = useTheme();
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{text}</Text>
+      <Text style={[styles.title, {color: theme.text}]}>{text}</Text>
       <View style={styles.bar} />
     </View>
   );
@@ -16,7 +20,6 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   title: {
-    color: '#FFF',
     fontSize: 18,
     fontFamily: 'Roboto-medium',
   },

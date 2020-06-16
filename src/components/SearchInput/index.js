@@ -2,15 +2,23 @@ import React, {useMemo} from 'react';
 import {View, TouchableOpacity, TextInput, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import {useTheme} from '../../hooks/ThemeContext';
+
 function SearchInput({onClear, onPressToSearch, ...props}) {
+  const {theme} = useTheme();
+
   const existValue = useMemo(() => {
     return props.value && String(props.value).length > 0;
   }, [props.value]);
 
   return (
     <View style={styles.container}>
-      <View style={styles.inputArea}>
-        <TextInput style={styles.input} {...props} />
+      <View style={[styles.inputArea, {backgroundColor: theme.text}]}>
+        <TextInput
+          placeholderTextColor="#999"
+          style={[styles.input, {color: theme.background}]}
+          {...props}
+        />
         {existValue ? (
           <TouchableOpacity style={styles.buttonCancel} onPress={onClear}>
             <Icon name="window-close" color="#221F1F" size={24} />
@@ -34,7 +42,6 @@ const styles = StyleSheet.create({
   inputArea: {
     flex: 1,
     borderRadius: 7,
-    backgroundColor: '#FFF',
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -42,7 +49,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingVertical: 20,
     paddingHorizontal: 10,
-    color: '#221F1F',
   },
   buttonSearch: {
     backgroundColor: '#E21221',
