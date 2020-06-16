@@ -18,7 +18,7 @@ O **IM** está disponível para Android e iOS. :iphone:
 No desenvolvimento do **iMovie** foi utilizado os seguintes recursos e conceitos:
 
 - [x] Conexão nativa com o Firebase Android e iOS;
-- [x] Utilização da Context API do React para mudar o tema da aplicação entre (Dark e Light)
+- [x] Utilização da Context API do React para mudar o tema da aplicação entre dark e light.
 
 
 
