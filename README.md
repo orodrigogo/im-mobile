@@ -1,10 +1,8 @@
 
 <div align="center" >
-  <img src="./src/assets/logo-im.png">
+  <img src="./src/assets/logo-im.png" width="50px" height="50">
 </div>
 
-
-_________________
 
 
 ### Sobre
