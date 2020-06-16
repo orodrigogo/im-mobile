@@ -11,9 +11,9 @@ const Home = () => {
   const [movies, setMovies] = useState([]);
   const navigation = useNavigation();
 
-  function handleFavorites() {
+  const handleFavorites = () => {
     navigation.navigate('Favorites');
-  }
+  };
 
   const fetchMovies = useCallback(async () => {
     let data = [];

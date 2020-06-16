@@ -1,15 +1,42 @@
-import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import React, {useRef, useEffect} from 'react';
+import {View, Text, StyleSheet, Animated} from 'react-native';
 
 import {useTheme} from '../../hooks/ThemeContext';
 
 const Title = ({text}) => {
   const {theme} = useTheme();
 
+  const offset = useRef(new Animated.Value(-200)).current;
+  const opacity = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    Animated.parallel([
+      Animated.spring(offset, {
+        toValue: 0,
+        speed: 5,
+        bounciness: 20,
+      }),
+      Animated.timing(opacity, {
+        toValue: 1,
+        duration: 500,
+      }),
+    ]).start();
+  }, [offset, opacity]);
+
   return (
     <View style={styles.container}>
-      <Text style={[styles.title, {color: theme.text}]}>{text}</Text>
-      <View style={styles.bar} />
+      <Animated.View
+        style={[
+          {
+            transform: [{translateX: offset}],
+          },
+          {
+            opacity,
+          },
+        ]}>
+        <Text style={[styles.title, {color: theme.text}]}>{text}</Text>
+        <View style={styles.bar} />
+      </Animated.View>
     </View>
   );
 };
