@@ -6,33 +6,67 @@ import {
   SafeAreaView,
   StyleSheet,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/native';
+
+import database from '../../services/firebase';
 
 import Button from '../../components/Button';
 import Title from '../../components/Title';
 import Subject from '../../components/Subject';
 
 const Detail = ({route}) => {
-  const [watched, setWatched] = useState(true);
-  const [liked, setLiked] = useState(false);
   const navigation = useNavigation();
-
   const {data} = route.params;
-  console.log(data);
 
-  function handleGoBack() {
+  const [watched, setWatched] = useState(data.watched);
+  const [like, setLike] = useState(data.like);
+  const [loadingWatchedUpdate, setLoadingWatchedUpdate] = useState(false);
+  const [loadingLikeUpdate, setLoadingLikedUpdate] = useState(false);
+
+  console.log(data.likes);
+
+  const handleGoBack = () => {
     navigation.navigate('Home');
-  }
+  };
 
-  function handleWatch() {
+  const handleUpdateLike = async () => {
+    if (loadingLikeUpdate) {
+      return;
+    }
+
+    setLoadingLikedUpdate(true);
+    await database()
+      .collection('movies')
+      .doc(data.id)
+      .update({
+        like: !like,
+      })
+      .catch(console.log);
+
+    setLike(!like);
+    setLoadingLikedUpdate(false);
+  };
+
+  const handleUpdateWatched = async () => {
+    if (loadingWatchedUpdate) {
+      return;
+    }
+
+    setLoadingWatchedUpdate(true);
+    await database()
+      .collection('movies')
+      .doc(data.id)
+      .update({
+        watched: !watched,
+      })
+      .catch(console.log);
+
     setWatched(!watched);
-  }
-
-  function handleLike() {
-    setLiked(!liked);
-  }
+    setLoadingWatchedUpdate(false);
+  };
 
   return (
     <SafeAreaView style={styles.main}>
@@ -54,26 +88,36 @@ const Detail = ({route}) => {
 
           <View style={styles.buttons}>
             <TouchableOpacity
+              disabled={loadingLikeUpdate}
               style={styles.mark}
               activeOpacity={0.5}
-              onPress={handleLike}>
-              <Icon
-                name="heart"
-                style={liked ? styles.actived : styles.disabled}
-              />
+              onPress={handleUpdateLike}>
+              {loadingLikeUpdate ? (
+                <ActivityIndicator color="#C3C3C3" size="small" />
+              ) : (
+                <Icon
+                  name="heart"
+                  style={like ? styles.actived : styles.disabled}
+                />
+              )}
               <Text style={styles.markTextLeft}>
                 Marcar na minha lista de favoritos
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
+              disabled={loadingWatchedUpdate}
               style={styles.mark}
               activeOpacity={0.5}
-              onPress={handleWatch}>
+              onPress={handleUpdateWatched}>
               <Text style={styles.markTextRight}>Marcar como já assistido</Text>
-              <Icon
-                name="eye"
-                style={watched ? styles.actived : styles.disabled}
-              />
+              {loadingWatchedUpdate ? (
+                <ActivityIndicator color="#C3C3C3" size="small" />
+              ) : (
+                <Icon
+                  name="eye"
+                  style={watched ? styles.actived : styles.disabled}
+                />
+              )}
             </TouchableOpacity>
           </View>
 
