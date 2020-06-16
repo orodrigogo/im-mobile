@@ -113,7 +113,9 @@ const Detail = ({route}) => {
               style={styles.mark}
               activeOpacity={0.5}
               onPress={handleUpdateWatched}>
-              <Text style={styles.markTextRight}>Marcar como já assistido</Text>
+              <Text style={[styles.markTextRight, {color: theme.text}]}>
+                Marcar como já assistido
+              </Text>
               {loadingWatchedUpdate ? (
                 <ActivityIndicator color="#C3C3C3" size="small" />
               ) : (
