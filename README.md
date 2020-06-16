@@ -1,6 +1,6 @@
 
 <div align="center" >
-  <img src="./src/assets/logo-im.png" width="50px" height="50">
+  <img src="./src/assets/logo-im.png" width="70px" height="70">
 </div>
 
 
