@@ -14,7 +14,7 @@ Com ele, é possível organizar seus filmes favoritos e marcar quais você já a
 O **IM** está disponível para Android e iOS. :iphone:
 
 
-### :star: Stack & Features
+### Stack & Features
 No desenvolvimento do **iMovie** foi utilizado os seguintes recursos e conceitos:
 
 - [x] Conexão nativa com o Firebase Android e iOS;
