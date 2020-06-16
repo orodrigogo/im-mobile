@@ -12,9 +12,10 @@ import Title from '../Title';
 
 const MoviesSection = ({title, movies}) => {
   const navigation = useNavigation();
-  function handleOpenDetail() {
-    navigation.navigate('Detail');
-  }
+
+  const handleOpenDetail = (data) => {
+    navigation.navigate('Detail', {data});
+  };
 
   return (
     <View style={styles.container}>
@@ -25,12 +26,13 @@ const MoviesSection = ({title, movies}) => {
         style={styles.movies}
         data={movies}
         renderItem={(movie) => (
-          <TouchableOpacity activeOpacity={0.5} onPress={handleOpenDetail}>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            onPress={() => handleOpenDetail(movie.item)}>
             <Image
               style={styles.image}
               source={{
-                uri:
-                  'https://upload.wikimedia.org/wikipedia/pt/9/9b/Avengers_Endgame.jpg',
+                uri: movie.item.url_cover_image,
               }}
             />
           </TouchableOpacity>

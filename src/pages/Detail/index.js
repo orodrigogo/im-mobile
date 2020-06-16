@@ -14,10 +14,13 @@ import Button from '../../components/Button';
 import Title from '../../components/Title';
 import Subject from '../../components/Subject';
 
-const Detail = () => {
+const Detail = ({route}) => {
   const [watched, setWatched] = useState(true);
   const [liked, setLiked] = useState(false);
   const navigation = useNavigation();
+
+  const {data} = route.params;
+  console.log(data);
 
   function handleGoBack() {
     navigation.navigate('Home');
@@ -36,16 +39,17 @@ const Detail = () => {
       <Image
         style={styles.cover}
         source={{
-          uri:
-            'https://culturadoria.com.br/wp-content/uploads/2019/04/Culture_AvengersEndgameTrailer-1.jpg',
+          uri: data.url_cover_image,
         }}
       />
 
       <View style={styles.container}>
         <View style={styles.content}>
           <View>
-            <Text style={styles.title}>Avengers endgame</Text>
-            <Text style={styles.recommendations}>95% gostaram desse filme</Text>
+            <Text style={styles.title}>{data.title}</Text>
+            <Text style={styles.recommendations}>
+              {data.recommendation}% gostaram desse filme
+            </Text>
           </View>
 
           <View style={styles.buttons}>
@@ -75,20 +79,15 @@ const Detail = () => {
 
           <View style={styles.about}>
             <Title text="Sobre" />
-            <Text style={styles.aboutText}>
-              Após Thanos eliminar metade das criaturas vivas, os Vingadores têm
-              de lidar com a perda de amigos e entes queridos. Com Tony Stark
-              vagando perdido no espaço sem água e comida, Steve Rogers e
-              Natasha Romanov lideram a resistência contra o titã louco.
-            </Text>
+            <Text style={styles.aboutText}>{data.description}</Text>
           </View>
 
           <View style={styles.subject}>
             <Title text="Assuntos" />
             <View style={styles.subjects}>
-              <Subject title="ficção" />
-              <Subject title="ação" />
-              <Subject title="aventura" />
+              {data.subjects.map((item) => (
+                <Subject title={item} />
+              ))}
             </View>
           </View>
         </View>

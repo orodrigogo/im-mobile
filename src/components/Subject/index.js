@@ -1,10 +1,10 @@
 import React from 'react';
 import {View, StyleSheet, Text} from 'react-native';
 
-const Subject = () => {
+const Subject = ({title}) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>ficção</Text>
+      <Text style={styles.title}>{title}</Text>
     </View>
   );
 };
