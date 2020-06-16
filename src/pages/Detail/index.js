@@ -11,6 +11,8 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/native';
 
+import {useTheme} from '../../hooks/ThemeContext';
+
 import database from '../../services/firebase';
 
 import Button from '../../components/Button';
@@ -26,7 +28,7 @@ const Detail = ({route}) => {
   const [loadingWatchedUpdate, setLoadingWatchedUpdate] = useState(false);
   const [loadingLikeUpdate, setLoadingLikedUpdate] = useState(false);
 
-  console.log(data.likes);
+  const {theme} = useTheme();
 
   const handleGoBack = () => {
     navigation.navigate('Home');
@@ -80,8 +82,10 @@ const Detail = ({route}) => {
       <View style={styles.container}>
         <View style={styles.content}>
           <View>
-            <Text style={styles.title}>{data.title}</Text>
-            <Text style={styles.recommendations}>
+            <Text style={[styles.title, {color: theme.text}]}>
+              {data.title}
+            </Text>
+            <Text style={[styles.recommendations, {color: theme.text}]}>
               {data.recommendation}% gostaram desse filme
             </Text>
           </View>
@@ -100,7 +104,7 @@ const Detail = ({route}) => {
                   style={like ? styles.actived : styles.disabled}
                 />
               )}
-              <Text style={styles.markTextLeft}>
+              <Text style={[styles.markTextLeft, {color: theme.text}]}>
                 Marcar na minha lista de favoritos
               </Text>
             </TouchableOpacity>
@@ -123,7 +127,9 @@ const Detail = ({route}) => {
 
           <View style={styles.about}>
             <Title text="Sobre" />
-            <Text style={styles.aboutText}>{data.description}</Text>
+            <Text style={[styles.aboutText, {color: theme.text}]}>
+              {data.description}
+            </Text>
           </View>
 
           <View style={styles.subject}>
@@ -163,7 +169,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontFamily: 'Roboto-medium',
-    color: '#FFF',
   },
   recommendations: {
     fontSize: 14,
@@ -218,13 +223,11 @@ const styles = StyleSheet.create({
     fontSize: 32,
   },
   markTextLeft: {
-    color: '#FFF',
     width: 110,
     marginLeft: 7,
     fontFamily: 'Roboto-regular',
   },
   markTextRight: {
-    color: '#FFF',
     width: 110,
     textAlign: 'right',
     marginRight: 7,
