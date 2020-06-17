@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {
   View,
   Text,
@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
+import ShimmerPlaceHolder from 'react-native-shimmer-placeholder';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/native';
 
@@ -21,10 +22,13 @@ import ProgressiveImage from '../../components/ProgressiveImage';
 
 const Detail = ({route}) => {
   const navigation = useNavigation();
-  const {data} = route.params;
+  const {id} = route.params;
 
-  const [watched, setWatched] = useState(data.watched);
-  const [like, setLike] = useState(data.like);
+  const [load, setLoad] = useState(true);
+  const [data, setData] = useState({});
+
+  const [watched, setWatched] = useState();
+  const [like, setLike] = useState();
   const [loadingWatchedUpdate, setLoadingWatchedUpdate] = useState(false);
   const [loadingLikeUpdate, setLoadingLikedUpdate] = useState(false);
 
@@ -42,7 +46,7 @@ const Detail = ({route}) => {
     setLoadingLikedUpdate(true);
     await database()
       .collection('movies')
-      .doc(data.id)
+      .doc(id)
       .update({
         like: !like,
       })
@@ -60,7 +64,7 @@ const Detail = ({route}) => {
     setLoadingWatchedUpdate(true);
     await database()
       .collection('movies')
-      .doc(data.id)
+      .doc(id)
       .update({
         watched: !watched,
       })
@@ -70,74 +74,119 @@ const Detail = ({route}) => {
     setLoadingWatchedUpdate(false);
   };
 
+  const loadDetail = useCallback(async () => {
+    await database()
+      .collection('movies')
+      .doc(id)
+      .get()
+      .then((snapshot) => {
+        setData({...snapshot.data()});
+        setWatched(snapshot.data().watched);
+        setLike(snapshot.data().like);
+      })
+      .catch(console.log);
+
+    setLoad(false);
+  }, [id]);
+
+  useEffect(() => {
+    loadDetail();
+  }, [loadDetail]);
+
   return (
     <SafeAreaView style={styles.main}>
-      <View style={styles.cover}>
-        <ProgressiveImage url={data.url_cover_image} />
-      </View>
+      <ShimmerPlaceHolder
+        colorShimmer={['#383333', '#242222', '#383333']}
+        autoRun={true}
+        visible={!load}
+        style={styles.cover}>
+        <View style={styles.cover}>
+          <ProgressiveImage url={data.url_cover_image} />
+        </View>
+      </ShimmerPlaceHolder>
 
       <View style={styles.container}>
         <View style={styles.content}>
-          <View>
+          <ShimmerPlaceHolder
+            colorShimmer={['#332e2e', '#575757', '#332e2e']}
+            autoRun={true}
+            visible={!load}
+            style={styles.shimmerEffectText}>
             <Text style={[styles.title, {color: theme.text}]}>
               {data.title}
             </Text>
             <Text style={[styles.recommendations, {color: theme.text}]}>
               {data.recommendation}% gostaram desse filme
             </Text>
-          </View>
+          </ShimmerPlaceHolder>
 
-          <View style={styles.buttons}>
-            <TouchableOpacity
-              disabled={loadingLikeUpdate}
-              style={styles.mark}
-              activeOpacity={0.5}
-              onPress={handleUpdateLike}>
-              {loadingLikeUpdate ? (
-                <ActivityIndicator color="#C3C3C3" size="small" />
-              ) : (
-                <Icon
-                  name="heart"
-                  style={like ? styles.actived : styles.disabled}
-                />
-              )}
-              <Text style={[styles.markTextLeft, {color: theme.text}]}>
-                Marcar na minha lista de favoritos
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              disabled={loadingWatchedUpdate}
-              style={styles.mark}
-              activeOpacity={0.5}
-              onPress={handleUpdateWatched}>
-              <Text style={[styles.markTextRight, {color: theme.text}]}>
-                Marcar como já assistido
-              </Text>
-              {loadingWatchedUpdate ? (
-                <ActivityIndicator color="#C3C3C3" size="small" />
-              ) : (
-                <Icon
-                  name="eye"
-                  style={watched ? styles.actived : styles.disabled}
-                />
-              )}
-            </TouchableOpacity>
-          </View>
+          <ShimmerPlaceHolder
+            colorShimmer={['#332e2e', '#575757', '#332e2e']}
+            autoRun={true}
+            visible={!load}
+            style={styles.shimmerEffectText}>
+            <View style={styles.buttons}>
+              <TouchableOpacity
+                disabled={loadingLikeUpdate}
+                style={styles.mark}
+                activeOpacity={0.5}
+                onPress={handleUpdateLike}>
+                {loadingLikeUpdate ? (
+                  <ActivityIndicator color="#C3C3C3" size="small" />
+                ) : (
+                  <Icon
+                    name="heart"
+                    style={like ? styles.actived : styles.disabled}
+                  />
+                )}
+                <Text style={[styles.markTextLeft, {color: theme.text}]}>
+                  Marcar na minha lista de favoritos
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                disabled={loadingWatchedUpdate}
+                style={styles.mark}
+                activeOpacity={0.5}
+                onPress={handleUpdateWatched}>
+                <Text style={[styles.markTextRight, {color: theme.text}]}>
+                  Marcar como já assistido
+                </Text>
+                {loadingWatchedUpdate ? (
+                  <ActivityIndicator color="#C3C3C3" size="small" />
+                ) : (
+                  <Icon
+                    name="eye"
+                    style={watched ? styles.actived : styles.disabled}
+                  />
+                )}
+              </TouchableOpacity>
+            </View>
+          </ShimmerPlaceHolder>
 
           <View style={styles.about}>
             <Title text="Sobre" />
-            <Text style={[styles.aboutText, {color: theme.text}]}>
-              {data.description}
-            </Text>
+            <ShimmerPlaceHolder
+              colorShimmer={['#332e2e', '#575757', '#332e2e']}
+              autoRun={true}
+              visible={!load}
+              style={styles.shimmerEffectText}>
+              <Text style={[styles.aboutText, {color: theme.text}]}>
+                {data.description}
+              </Text>
+            </ShimmerPlaceHolder>
           </View>
 
           <View style={styles.subject}>
             <Title text="Assuntos" />
-            <View style={styles.subjects}>
-              {data.subjects.map((item) => (
-                <Subject title={item} />
-              ))}
-            </View>
+            <ShimmerPlaceHolder
+              colorShimmer={['#332e2e', '#575757', '#332e2e']}
+              autoRun={true}
+              visible={!load}
+              style={styles.shimmerEffectText}>
+              <View style={styles.subjects}>
+                {!load && data.subjects.map((item) => <Subject title={item} />)}
+              </View>
+            </ShimmerPlaceHolder>
           </View>
         </View>
 
@@ -230,6 +279,12 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     marginRight: 7,
     fontFamily: 'Roboto-regular',
+  },
+  shimmerEffectText: {
+    width: '100%',
+    height: 50,
+    marginVertical: 10,
+    opacity: 0.7,
   },
 });
 

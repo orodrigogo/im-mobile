@@ -52,8 +52,8 @@ const Favorites = () => {
     setFavorites(data);
   }, []);
 
-  const handleOpenDetail = (data) => {
-    navigation.navigate('Detail', {data});
+  const handleOpenDetail = (id) => {
+    navigation.navigate('Detail', {id});
   };
 
   useEffect(() => {
@@ -86,12 +86,12 @@ const Favorites = () => {
             columnWrapperStyle={styles.movies}
             data={favorites}
             keyExtractor={(item) => String(item.id)}
-            renderItem={(item) => (
+            renderItem={({item}) => (
               <TouchableOpacity
                 activeOpacity={0.5}
-                onPress={() => handleOpenDetail(item.item)}>
+                onPress={() => handleOpenDetail(item.id)}>
                 <View style={styles.image}>
-                  <ProgressiveImage url={item.item.url_thumbnail_image} />
+                  <ProgressiveImage url={item.url_thumbnail_image} />
                 </View>
               </TouchableOpacity>
             )}

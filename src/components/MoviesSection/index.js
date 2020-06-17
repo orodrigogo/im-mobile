@@ -1,4 +1,4 @@
-import React, {useRef, useEffect} from 'react';
+import React from 'react';
 import {
   TouchableOpacity,
   FlatList,
@@ -14,8 +14,8 @@ import ProgressiveImage from '../ProgressiveImage';
 const MoviesSection = ({title, load, movies}) => {
   const navigation = useNavigation();
 
-  const handleOpenDetail = (data) => {
-    navigation.navigate('Detail', {data});
+  const handleOpenDetail = (id) => {
+    navigation.navigate('Detail', {id});
   };
 
   return (
@@ -29,12 +29,12 @@ const MoviesSection = ({title, load, movies}) => {
           showsHorizontalScrollIndicator={false}
           style={styles.movies}
           data={movies}
-          renderItem={(movie) => (
+          renderItem={({item}) => (
             <TouchableOpacity
               activeOpacity={0.5}
-              onPress={() => handleOpenDetail(movie.item)}>
+              onPress={() => handleOpenDetail(item.id)}>
               <View style={styles.image}>
-                <ProgressiveImage url={movie.item.url_thumbnail_image} />
+                <ProgressiveImage url={item.url_thumbnail_image} />
               </View>
             </TouchableOpacity>
           )}
