@@ -24,20 +24,21 @@ const Title = ({text}) => {
   }, [offset, opacity]);
 
   return (
-    <View style={styles.container}>
-      <Animated.View
-        style={[
+    <Animated.View
+      style={
+        (styles.container,
+        [
           {
             transform: [{translateX: offset}],
           },
           {
             opacity,
           },
-        ]}>
-        <Text style={[styles.title, {color: theme.text}]}>{text}</Text>
-        <View style={styles.bar} />
-      </Animated.View>
-    </View>
+        ])
+      }>
+      <Text style={[styles.title, {color: theme.text}]}>{text}</Text>
+      <View style={styles.bar} />
+    </Animated.View>
   );
 };
 

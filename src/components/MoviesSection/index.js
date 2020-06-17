@@ -20,7 +20,6 @@ const MoviesSection = ({title, movies}) => {
   return (
     <View style={styles.container}>
       <Title text={title} />
-
       <FlatList
         horizontal={true}
         showsHorizontalScrollIndicator={false}
