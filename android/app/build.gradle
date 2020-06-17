@@ -135,6 +135,12 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        
+        /* 
+        Habilitando o suporte ao multidex para resolver o erro:
+        The number of method references in a .dex file cannot exceed 64K.
+        */
+        multiDexEnabled true
     }
     splits {
         abi {

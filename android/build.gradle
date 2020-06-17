@@ -6,13 +6,14 @@ buildscript {
         minSdkVersion = 16
         compileSdkVersion = 28
         targetSdkVersion = 28
+        supportLibVersion = "28.0.0"
     }
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:3.5.2")
+        classpath('com.android.tools.build:gradle:3.6.3')
         classpath("com.google.gms:google-services:4.3.3")
 
         // NOTE: Do not place your application dependencies here; they belong
