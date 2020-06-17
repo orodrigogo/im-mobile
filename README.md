@@ -26,7 +26,14 @@ No desenvolvimento do **iMovie** foi utilizado os seguintes recursos e conceitos
 - [x] Utilizei a Context API do React Native com um listener para identificar automaticamente quando muda o status da conexão com a Internet para saber se o aplicativo está offline ou online.
 
 
+### Anotações
 
+No Android, para verificar o estado na conexão com a internet é necessário incluir no AndroidManifest.xml o seguinte:
+
+```xml
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+```
 
 
 <div align="center">
