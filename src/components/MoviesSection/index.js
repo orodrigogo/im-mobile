@@ -3,14 +3,15 @@ import {
   View,
   TouchableOpacity,
   FlatList,
-  Image,
   StyleSheet,
+  ActivityIndicator,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
 import Title from '../Title';
+import ProgressiveImage from '../ProgressiveImage';
 
-const MoviesSection = ({title, movies}) => {
+const MoviesSection = ({title, load = true, movies}) => {
   const navigation = useNavigation();
 
   const handleOpenDetail = (data) => {
@@ -20,24 +21,27 @@ const MoviesSection = ({title, movies}) => {
   return (
     <View style={styles.container}>
       <Title text={title} />
-      <FlatList
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
-        style={styles.movies}
-        data={movies}
-        renderItem={(movie) => (
-          <TouchableOpacity
-            activeOpacity={0.5}
-            onPress={() => handleOpenDetail(movie.item)}>
-            <Image
-              style={styles.image}
-              source={{
-                uri: movie.item.url_cover_image,
-              }}
-            />
-          </TouchableOpacity>
-        )}
-      />
+      {load ? (
+        <ActivityIndicator style={styles.loader} />
+      ) : (
+        <FlatList
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          style={styles.movies}
+          data={movies}
+          renderItem={(movie) => (
+            <TouchableOpacity
+              activeOpacity={0.5}
+              onPress={() => handleOpenDetail(movie.item)}>
+              <ProgressiveImage
+                source={{
+                  uri: movie.item.url_cover_image,
+                }}
+              />
+            </TouchableOpacity>
+          )}
+        />
+      )}
     </View>
   );
 };
@@ -46,14 +50,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  image: {
-    height: 150,
-    width: 100,
-    marginHorizontal: 5,
-  },
   movies: {
     flex: 1,
     marginTop: 5,
+  },
+  loader: {
+    marginTop: 30,
   },
 });
 

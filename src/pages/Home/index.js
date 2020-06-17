@@ -1,7 +1,8 @@
 import React, {useCallback, useEffect, useState, useMemo} from 'react';
 import {View, SafeAreaView, StyleSheet} from 'react-native';
-import database from '../../services/firebase';
 import {useNavigation} from '@react-navigation/native';
+
+import database from '../../services/firebase';
 
 import Header from '../../components/Header';
 import Button from '../../components/Button';
@@ -9,6 +10,7 @@ import MoviesSection from '../../components/MoviesSection';
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
+  const [load, setLoad] = useState(true);
   const navigation = useNavigation();
 
   const handleFavorites = () => {
@@ -28,6 +30,7 @@ const Home = () => {
       });
 
     setMovies(data);
+    setLoad(false);
   }, []);
 
   useEffect(() => {
@@ -52,9 +55,17 @@ const Home = () => {
         <Header />
 
         <View style={styles.content}>
-          <MoviesSection title="Recomendados para você" movies={recommended} />
-          <MoviesSection title="Populares" movies={popular} />
-          <MoviesSection title="Assistir Novamente" movies={watchAgain} />
+          <MoviesSection
+            title="Recomendados para você"
+            movies={recommended}
+            load={load}
+          />
+          <MoviesSection title="Populares" movies={popular} load={load} />
+          <MoviesSection
+            title="Assistir Novamente"
+            movies={watchAgain}
+            load={load}
+          />
         </View>
 
         <Button onPress={handleFavorites} title="Meus Favoritos" />
