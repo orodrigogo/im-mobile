@@ -3,7 +3,6 @@ import {
   TouchableOpacity,
   FlatList,
   StyleSheet,
-  Animated,
   View,
   ActivityIndicator,
 } from 'react-native';
@@ -18,15 +17,6 @@ const MoviesSection = ({title, load, movies}) => {
   const handleOpenDetail = (data) => {
     navigation.navigate('Detail', {data});
   };
-
-  const loadAnimation = useRef(new Animated.Value(0)).current;
-
-  useEffect(() => {
-    Animated.timing(loadAnimation, {
-      toValue: 1,
-      duration: 300,
-    }).start();
-  }, [loadAnimation]);
 
   return (
     <View style={styles.container}>
