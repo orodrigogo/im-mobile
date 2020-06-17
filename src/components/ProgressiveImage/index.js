@@ -1,24 +1,34 @@
-import React from 'react';
-import {View, StyleSheet, Image} from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet} from 'react-native';
+import ShimmerPlaceHolder from 'react-native-shimmer-placeholder';
+import FastImage from 'react-native-fast-image';
 
-const ProgressiveImage = (props) => {
+const ProgressiveImage = ({url}) => {
+  const [loaded, setLoaded] = useState(false);
+
   return (
-    <View style={styles.container}>
-      <Image style={styles.image} {...props} />
-    </View>
+    <ShimmerPlaceHolder
+      autoRun={true}
+      visible={loaded}
+      style={styles.container}>
+      <FastImage
+        source={{
+          uri: url,
+          headers: {Authorization: 'someAuthToken'},
+          priority: FastImage.priority.normal,
+        }}
+        style={styles.container}
+        resizeMode={FastImage.resizeMode.cover}
+        onLoadEnd={() => setLoaded(true)}
+      />
+    </ShimmerPlaceHolder>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    height: 150,
-    width: 100,
-    marginHorizontal: 5,
-    backgroundColor: '#e1e4e8',
-  },
-  image: {
-    height: 150,
-    width: 100,
+    width: '100%',
+    height: '100%',
   },
 });
 

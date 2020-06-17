@@ -18,6 +18,7 @@ import database from '../../services/firebase';
 import Button from '../../components/Button';
 import Title from '../../components/Title';
 import Subject from '../../components/Subject';
+import ProgressiveImage from '../../components/ProgressiveImage';
 
 const Detail = ({route}) => {
   const navigation = useNavigation();
@@ -72,12 +73,9 @@ const Detail = ({route}) => {
 
   return (
     <SafeAreaView style={styles.main}>
-      <Image
-        style={styles.cover}
-        source={{
-          uri: data.url_cover_image,
-        }}
-      />
+      <View style={styles.cover}>
+        <ProgressiveImage url={data.url_cover_image} />
+      </View>
 
       <View style={styles.container}>
         <View style={styles.content}>
@@ -166,7 +164,6 @@ const styles = StyleSheet.create({
   cover: {
     width: '100%',
     height: 250,
-    resizeMode: 'cover',
   },
   title: {
     fontSize: 24,

@@ -20,6 +20,10 @@ No desenvolvimento do **iMovie** foi utilizado os seguintes recursos e conceitos
 - [x] Conexão nativa com o Firebase Android e iOS;
 - [x] Utilização da Context API do React para mudar o tema da aplicação entre dark e light.
 - [x] Utilização da API de Animações do React Native;
+- [x] Utilização do componente **[FastImage](https://github.com/DylanVann/react-native-fast-image)** para cache e performance de carregamento das imagens;
+- [x] Aplicação do efeito **[Shimmer](https://github.com/tomzaku/react-native-shimmer-placeholder)** para o carregamento de contéudo;
+
+
 
 
 

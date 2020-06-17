@@ -4,7 +4,7 @@ import {
   SafeAreaView,
   StyleSheet,
   FlatList,
-  Image,
+  ActivityIndicator,
   TouchableOpacity,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
@@ -14,10 +14,12 @@ import Header from '../../components/Header';
 import Title from '../../components/Title';
 import Button from '../../components/Button';
 import SearchInput from '../../components/SearchInput';
+import ProgressiveImage from '../../components/ProgressiveImage';
 
 const Favorites = () => {
   const [favorites, setFavorites] = useState([]);
   const [search, setSearch] = useState();
+  const [load, setLoad] = useState(true);
 
   const navigation = useNavigation();
 
@@ -46,6 +48,7 @@ const Favorites = () => {
       });
     });
 
+    setLoad(false);
     setFavorites(data);
   }, []);
 
@@ -74,24 +77,26 @@ const Favorites = () => {
             onPressToSearch={() => fetchFavorites(search)}
           />
         </View>
-
-        <FlatList
-          style={styles.list}
-          numColumns={3}
-          columnWrapperStyle={styles.movies}
-          data={favorites}
-          keyExtractor={(item) => String(item.id)}
-          renderItem={(item) => (
-            <TouchableOpacity
-              activeOpacity={0.5}
-              onPress={() => handleOpenDetail(item.item)}>
-              <Image
-                source={{uri: item.item.url_thumbnail_image}}
-                style={styles.image}
-              />
-            </TouchableOpacity>
-          )}
-        />
+        {load ? (
+          <ActivityIndicator size="small" style={styles.loader} />
+        ) : (
+          <FlatList
+            style={styles.list}
+            numColumns={3}
+            columnWrapperStyle={styles.movies}
+            data={favorites}
+            keyExtractor={(item) => String(item.id)}
+            renderItem={(item) => (
+              <TouchableOpacity
+                activeOpacity={0.5}
+                onPress={() => handleOpenDetail(item.item)}>
+                <View style={styles.image}>
+                  <ProgressiveImage url={item.item.url_thumbnail_image} />
+                </View>
+              </TouchableOpacity>
+            )}
+          />
+        )}
 
         <Button title="Voltar" onPress={handleGoBack} />
       </View>
@@ -120,6 +125,9 @@ const styles = StyleSheet.create({
     marginVertical: 5,
   },
   list: {
+    flex: 1,
+  },
+  loader: {
     flex: 1,
   },
 });

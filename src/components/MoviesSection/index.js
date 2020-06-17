@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useRef, useEffect} from 'react';
 import {
-  View,
   TouchableOpacity,
   FlatList,
   StyleSheet,
+  Animated,
+  View,
   ActivityIndicator,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
@@ -11,18 +12,27 @@ import {useNavigation} from '@react-navigation/native';
 import Title from '../Title';
 import ProgressiveImage from '../ProgressiveImage';
 
-const MoviesSection = ({title, load = true, movies}) => {
+const MoviesSection = ({title, load, movies}) => {
   const navigation = useNavigation();
 
   const handleOpenDetail = (data) => {
     navigation.navigate('Detail', {data});
   };
 
+  const loadAnimation = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    Animated.timing(loadAnimation, {
+      toValue: 1,
+      duration: 300,
+    }).start();
+  }, [loadAnimation]);
+
   return (
     <View style={styles.container}>
       <Title text={title} />
       {load ? (
-        <ActivityIndicator style={styles.loader} />
+        <ActivityIndicator size="small" style={styles.loader} />
       ) : (
         <FlatList
           horizontal={true}
@@ -33,11 +43,9 @@ const MoviesSection = ({title, load = true, movies}) => {
             <TouchableOpacity
               activeOpacity={0.5}
               onPress={() => handleOpenDetail(movie.item)}>
-              <ProgressiveImage
-                source={{
-                  uri: movie.item.url_cover_image,
-                }}
-              />
+              <View style={styles.image}>
+                <ProgressiveImage url={movie.item.url_thumbnail_image} />
+              </View>
             </TouchableOpacity>
           )}
         />
@@ -56,6 +64,11 @@ const styles = StyleSheet.create({
   },
   loader: {
     marginTop: 30,
+  },
+  image: {
+    height: 150,
+    width: 100,
+    marginHorizontal: 5,
   },
 });
 
