@@ -22,6 +22,8 @@ No desenvolvimento do **iMovie** foi utilizado os seguintes recursos e conceitos
 - [x] Utilização da API de Animações do React Native;
 - [x] Utilização do componente **[FastImage](https://github.com/DylanVann/react-native-fast-image)** para cache e performance de carregamento das imagens;
 - [x] Aplicação do efeito **[Shimmer](https://github.com/tomzaku/react-native-shimmer-placeholder)** para o carregamento de contéudo;
+- [x] Verifica se há conexão com a Internet utilizando o **[React Native Netinfo](https://github.com/react-native-community/react-native-netinfo)**  
+- [x] Utilizei a Context API do React Native com um listener para identificar automaticamente quando muda o status da conexão com a Internet.
 
 
 

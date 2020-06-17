@@ -1,20 +1,21 @@
 import React, {useMemo, useRef, useEffect} from 'react';
-import {useNavigation} from '@react-navigation/native';
 import {
-  View,
   Image,
   StyleSheet,
+  Text,
   TouchableOpacity,
   Animated,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 import logo from '../../assets/logo-im.png';
 
 import {useTheme} from '../../hooks/ThemeContext';
+import {useDataPersist} from '../../hooks/DataPersistContext';
 
 const Header = () => {
   const {theme, changeTheme} = useTheme();
-  const navigation = useNavigation();
+  const {isInternetConnection} = useDataPersist();
 
   const offset = useRef(new Animated.Value(-200)).current;
   const opacity = useRef(new Animated.Value(0)).current;
@@ -50,9 +51,13 @@ const Header = () => {
           },
         ],
       ]}>
-      <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-        <Icon name="home" color={theme.text} size={38} />
-      </TouchableOpacity>
+      <Text
+        style={[
+          {color: isInternetConnection ? '#79d70f' : '#F0A500'},
+          styles.connectInfo,
+        ]}>
+        {isInternetConnection ? 'Conectado à Internet' : 'Sem Internet'}
+      </Text>
 
       <Image source={logo} style={styles.logo} />
       <TouchableOpacity onPress={changeTheme}>
@@ -73,6 +78,11 @@ const styles = StyleSheet.create({
     height: 50,
     width: 50,
     resizeMode: 'contain',
+  },
+  connectInfo: {
+    fontSize: 12,
+    width: 65,
+    textAlign: 'center',
   },
 });
 
