@@ -10,6 +10,9 @@ O **iMovie** é um aplicativo mobile para os apaixonados por filmes.
 Com ele, é possível organizar seus filmes favoritos e marcar quais você já assistiu. 
 É um projeto que eu criei em **React Native** para aplicar os conceitos de **Mobile First com Firebase**.
 
+<div align="center" >
+  <img src="impreview.gif">
+</div>
 
 O **IM** está disponível para Android e iOS. :iphone:
 
