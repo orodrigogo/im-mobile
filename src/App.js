@@ -6,6 +6,8 @@ import DataPersistContext from './hooks/DataPersistContext';
 
 import Routes from './routes';
 
+console.disableYellowBox = true;
+
 const App = () => {
   return (
     <NavigationContainer>

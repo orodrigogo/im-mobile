@@ -12,6 +12,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/native';
 
 import {useTheme} from '../../hooks/ThemeContext';
+import {useDataPersist} from '../../hooks/DataPersistContext';
 
 import database from '../../services/firebase';
 
@@ -33,6 +34,7 @@ const Detail = ({route}) => {
   const [loadingLikeUpdate, setLoadingLikedUpdate] = useState(false);
 
   const {theme} = useTheme();
+  const {isInternetConnection} = useDataPersist();
 
   const handleGoBack = () => {
     navigation.navigate('Home');
@@ -42,8 +44,11 @@ const Detail = ({route}) => {
     if (loadingLikeUpdate) {
       return;
     }
+    setLike(!like);
+    if (isInternetConnection) {
+      setLoadingLikedUpdate(true);
+    }
 
-    setLoadingLikedUpdate(true);
     await database()
       .collection('movies')
       .doc(id)
@@ -52,7 +57,6 @@ const Detail = ({route}) => {
       })
       .catch(console.log);
 
-    setLike(!like);
     setLoadingLikedUpdate(false);
   };
 
@@ -60,8 +64,12 @@ const Detail = ({route}) => {
     if (loadingWatchedUpdate) {
       return;
     }
+    setWatched(!watched);
 
-    setLoadingWatchedUpdate(true);
+    if (isInternetConnection) {
+      setLoadingWatchedUpdate(true);
+    }
+
     await database()
       .collection('movies')
       .doc(id)
@@ -70,11 +78,14 @@ const Detail = ({route}) => {
       })
       .catch(console.log);
 
-    setWatched(!watched);
     setLoadingWatchedUpdate(false);
   };
 
   const loadDetail = useCallback(async () => {
+    if (isInternetConnection) {
+      setLoad(false);
+    }
+
     await database()
       .collection('movies')
       .doc(id)
@@ -87,7 +98,7 @@ const Detail = ({route}) => {
       .catch(console.log);
 
     setLoad(false);
-  }, [id]);
+  }, [id, isInternetConnection]);
 
   useEffect(() => {
     loadDetail();
@@ -184,7 +195,8 @@ const Detail = ({route}) => {
               visible={!load}
               style={styles.shimmerEffectText}>
               <View style={styles.subjects}>
-                {!load && data.subjects.map((item) => <Subject title={item} />)}
+                {data.subjects &&
+                  data.subjects.map((item) => <Subject title={item} />)}
               </View>
             </ShimmerPlaceHolder>
           </View>
